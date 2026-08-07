@@ -32,8 +32,8 @@ npm run dev
 
 ## 📬 Connect
 
-- GitHub: https://github.com/yourusername
-- LinkedIn: https://linkedin.com/in/yourprofile
+- GitHub: https://github.com/khaddeshivam
+- LinkedIn: https://linkedin.com/in/khaddeshivam
 
 ---
 
