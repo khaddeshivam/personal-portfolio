@@ -1,0 +1,1 @@
+export function TechBadges({ items, size = "sm" }: { items: string[]; size?: "sm" | "md" }) { const cls = size === "md" ? "px-3 py-1.5 text-xs" : "px-2 py-1 text-[11px]"; return <div className="flex flex-wrap gap-1.5">{items.map(item => <span className={`rounded-md border border-white/[.08] bg-white/[.03] font-mono text-zinc-400 ${cls}`} key={item}>{item}</span>)}</div>; }

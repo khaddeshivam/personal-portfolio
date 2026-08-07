@@ -1,0 +1,4 @@
+import { Zap } from "lucide-react";
+import { projectsCopy } from "@/data/projects";
+
+export function ProjectsHeader() { return <div className="grid grid-cols-1 items-end gap-y-6 pb-16 lg:grid-cols-12 lg:gap-x-24"><div className="lg:col-span-7"><Zap className="mb-4 h-7 w-7 fill-orange-500/20 text-orange-400" /><p className="mb-3 font-mono text-xs font-bold uppercase tracking-[.14em] text-orange-400">{projectsCopy.eyebrow}</p><h2 className="font-display text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl"><span className="block text-zinc-500">{projectsCopy.firstLine}</span><span className="mt-1 block text-white">{projectsCopy.secondLine}</span></h2></div><p className="max-w-md text-sm leading-6 text-zinc-400 md:text-base md:leading-7 lg:col-span-5">{projectsCopy.description}</p></div> }

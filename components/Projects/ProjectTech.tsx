@@ -1,0 +1,1 @@
+export function ProjectTech({ items }: { items: string[] }) { return <div className="mt-5 flex flex-wrap gap-1.5">{items.map(item => <span className="rounded-md border border-white/[.08] bg-white/[.025] px-2 py-1 font-mono text-[10px] text-zinc-400" key={item}>{item}</span>)}</div>; }
