@@ -54,3 +54,6 @@ header > div > div { border-color: transparent !important; background: transpare
 
 @keyframes resume-ripple { from { transform: translate(-50%,-50%) scale(0); opacity: .5; } to { transform: translate(-50%,-50%) scale(16); opacity: 0; } }
 .resume-noise { opacity: .035; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 160px 160px; }
+
+.footer-icon-btn { display: inline-flex; align-items: center; justify-content: center; height: 2.5rem; width: 2.5rem; border-radius: 9999px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.03); color: #a1a1aa; transition: all .3s ease; }
+.footer-icon-btn:hover { color: #fff; border-color: rgba(167,139,250,.45); box-shadow: 0 0 20px rgba(139,92,246,.28); transform: translateY(-2px); }

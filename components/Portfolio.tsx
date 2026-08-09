@@ -1,16 +1,12 @@
 "use client";
 
-import { ArrowUpRight, ChevronRight, Mail, Menu, X } from "lucide-react";
+import { ArrowUpRight, ChevronRight, Code2, FileText, Mail, Menu, X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
-import { achievements, coreStack, floatingTech, navigation, profile, sectionMeta, stats, story } from "@/data/portfolio";
+import { achievements, coreStack, floatingTech, footerLinks, navigation, profile, sectionMeta, stats, story } from "@/data/portfolio";
 import { Button } from "@/components/ui/button";
 import { useScrollProgress } from "@/hooks/use-scroll-progress";
-
-// lucide-react 1.0 dropped brand/logo icons entirely, so GitHub and LinkedIn
-// are small local SVGs (same size-prop API as lucide icons) rather than an import.
-function Github({ size = 16 }: { size?: number }) { return <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.833.092-.647.35-1.088.636-1.338-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.31.678.921.678 1.856 0 1.34-.012 2.421-.012 2.751 0 .268.18.58.688.482A10.02 10.02 0 0022 12.017C22 6.484 17.523 2 12 2z" /></svg> }
-function Linkedin({ size = 16 }: { size?: number }) { return <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zM7.119 20.452H3.555V9h3.564v11.452z" /></svg> }
+import { Github, Linkedin } from "@/components/icons/BrandIcons";
 
 const reveal = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } };
 function SectionHeading({ eyebrow, title, description }: { eyebrow: string; title: string; description?: string }) { return <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={reveal} transition={{ duration: 0.5 }} className="mb-12 max-w-2xl"><p className="mb-3 font-mono text-xs uppercase tracking-[.16em] text-orange-300">{eyebrow}</p><h2 className="font-display text-4xl font-bold tracking-[-.045em] text-white md:text-5xl">{title}</h2>{description && <p className="mt-4 text-base leading-7 text-zinc-400">{description}</p>}</motion.div> }
@@ -27,4 +23,38 @@ export function Achievements() { return <section id="achievements" className="se
 
 export function Contact() { return <section id="contact" className="section-shell pt-0"><div className="relative overflow-hidden rounded-[30px] border border-white/[.1] bg-[#131318] px-6 py-14 text-center md:px-12 md:py-20"><div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_30%_20%,rgba(139,92,246,.18),transparent_36%),radial-gradient(circle_at_80%_80%,rgba(236,72,153,.14),transparent_35%)]" /><h2 className="font-display text-4xl font-bold tracking-[-.055em] md:text-5xl">{sectionMeta.contact.title} <span className="accent-text">{sectionMeta.contact.accent}</span></h2><p className="mx-auto mt-5 max-w-lg text-zinc-400">{sectionMeta.contact.description}</p><div className="mt-8 flex flex-wrap justify-center gap-3"><Button asChild><a href={`mailto:${profile.email}`}>Email me <Mail size={16} /></a></Button><Button asChild variant="ghost"><a href={profile.github} target="_blank" rel="noreferrer"><Github size={16} />GitHub</a></Button><Button asChild variant="ghost"><a href={profile.linkedin} target="_blank" rel="noreferrer"><Linkedin size={16} />LinkedIn</a></Button></div></div></section> }
 
-export function Footer() { return <footer className="border-t border-white/[.08] px-6 py-8 text-center text-sm text-zinc-600">© 2026 {profile.name} · {profile.location}</footer> }
+export function Footer() {
+  return (
+    <footer className="border-t border-white/[.08]">
+      <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.6 }} className="mx-auto max-w-6xl px-6 py-14">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+          <div>
+            <a href="#home" className="font-display text-lg font-bold text-white">{profile.name}</a>
+            <p className="mt-1 text-sm font-semibold text-fuchsia-300">{profile.role}</p>
+            <p className="mt-3 max-w-xs text-sm leading-6 text-zinc-500">{profile.tagline}</p>
+          </div>
+          <div className="md:justify-self-center">
+            <p className="text-xs font-semibold uppercase tracking-[.14em] text-zinc-600">Quick links</p>
+            <ul className="mt-4 space-y-2.5">
+              {footerLinks.map(link => <li key={link.href}><a href={link.href} className="text-sm text-zinc-400 transition hover:text-white">{link.label}</a></li>)}
+            </ul>
+          </div>
+          <div className="md:justify-self-end">
+            <p className="text-xs font-semibold uppercase tracking-[.14em] text-zinc-600 md:text-right">Elsewhere</p>
+            <div className="mt-4 flex gap-2.5 md:justify-end">
+              <a href={profile.github} target="_blank" rel="noreferrer" aria-label="GitHub" className="footer-icon-btn"><Github size={17} /></a>
+              <a href={profile.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="footer-icon-btn"><Linkedin size={17} /></a>
+              <a href={profile.leetcode} target="_blank" rel="noreferrer" aria-label="LeetCode" className="footer-icon-btn"><Code2 size={17} /></a>
+              <a href={`mailto:${profile.email}`} aria-label="Email" className="footer-icon-btn"><Mail size={17} /></a>
+              <a href="/shivam-khadde-resume.pdf" download aria-label="Resume" className="footer-icon-btn"><FileText size={17} /></a>
+            </div>
+          </div>
+        </div>
+        <div className="mt-12 flex flex-col items-center gap-2 border-t border-white/[.06] pt-6 text-center text-xs text-zinc-600 sm:flex-row sm:justify-between sm:text-left">
+          <p>© 2026 {profile.name}.</p>
+          <p>Designed &amp; developed with <span className="text-rose-400">❤</span> using Next.js, TypeScript, Tailwind CSS, and Framer Motion.</p>
+        </div>
+      </motion.div>
+    </footer>
+  );
+}
