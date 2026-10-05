@@ -4,4 +4,34 @@ import { motion } from "framer-motion";
 import type { FeaturedProject } from "@/types/project";
 
 const colors = { violet: "from-violet-500 to-fuchsia-500", blue: "from-sky-500 to-blue-600", orange: "from-orange-400 to-rose-500", emerald: "from-emerald-400 to-cyan-500" };
-export function ProjectImage({ project, index }: { project: FeaturedProject; index: number }) { const reverse = index % 2 !== 0; return <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .55, delay: .08 }} whileHover={{ rotateY: 0, rotateX: 0, rotateZ: 0, scale: 1.025 }} className={`project-preview ${reverse ? "project-preview-right" : ""}`}><div className="flex h-7 items-center gap-1.5 border-b border-white/[.07] bg-white/[.03] px-3"><i /><i /><i /><span className="ml-2 h-2 w-24 rounded-full bg-white/[.08]" /></div><div className="flex h-[calc(100%-1.75rem)]"><aside className="w-[16%] border-r border-white/[.07] p-2"><span className={`block h-5 rounded bg-gradient-to-r ${colors[project.theme]}`} /><span className="mt-3 block h-2 rounded bg-white/10" /><span className="mt-2 block h-2 rounded bg-white/[.06]" /><span className="mt-2 block h-2 rounded bg-white/[.06]" /></aside><div className="flex-1 p-4"><div className="flex items-center justify-between"><span className="h-3 w-28 rounded bg-white/[.14]" /><span className={`h-5 w-12 rounded bg-gradient-to-r ${colors[project.theme]} opacity-80`} /></div><div className="mt-4 grid grid-cols-3 gap-2">{[1,2,3].map(n => <div className="rounded-md border border-white/[.07] bg-white/[.025] p-2" key={n}><span className="block h-1.5 w-8 rounded bg-white/15" /><span className="mt-2 block h-4 w-full rounded bg-white/[.09]" /></div>)}</div><div className="mt-3 flex h-[46%] gap-3"><div className="flex-1 rounded-md border border-white/[.07] bg-white/[.025] p-3"><span className="block h-2 w-20 rounded bg-white/15" /><div className={`mt-6 h-14 rounded-tl-[100%] bg-gradient-to-tr ${colors[project.theme]} opacity-50`} /></div><div className="w-[35%] rounded-md border border-white/[.07] bg-white/[.025] p-3"><span className="block h-2 w-12 rounded bg-white/15" /><span className="mt-4 block h-12 rounded-full border-4 border-white/[.07] border-t-white/50" /></div></div></div></div></motion.div> }
+
+function ProjectScreenshot({ project }: { project: FeaturedProject }) {
+  // eslint-disable-next-line @next/next/no-img-element
+  return <img src={project.image} alt={`${project.name} screenshot`} className="h-full w-full object-cover object-top" loading="lazy" />;
+}
+
+function ProjectMockup({ project }: { project: FeaturedProject }) {
+  return <div className="flex h-full"><aside className="w-[16%] border-r border-white/[.07] p-2"><span className={`block h-5 rounded bg-gradient-to-r ${colors[project.theme]}`} /><span className="mt-3 block h-2 rounded bg-white/10" /><span className="mt-2 block h-2 rounded bg-white/[.06]" /><span className="mt-2 block h-2 rounded bg-white/[.06]" /></aside><div className="flex-1 p-4"><div className="flex items-center justify-between"><span className="h-3 w-28 rounded bg-white/[.14]" /><span className={`h-5 w-12 rounded bg-gradient-to-r ${colors[project.theme]} opacity-80`} /></div><div className="mt-4 grid grid-cols-3 gap-2">{[1, 2, 3].map(n => <div className="rounded-md border border-white/[.07] bg-white/[.025] p-2" key={n}><span className="block h-1.5 w-8 rounded bg-white/15" /><span className="mt-2 block h-4 w-full rounded bg-white/[.09]" /></div>)}</div><div className="mt-3 flex h-[46%] gap-3"><div className="flex-1 rounded-md border border-white/[.07] bg-white/[.025] p-3"><span className="block h-2 w-20 rounded bg-white/15" /><div className={`mt-6 h-14 rounded-tl-[100%] bg-gradient-to-tr ${colors[project.theme]} opacity-50`} /></div><div className="w-[35%] rounded-md border border-white/[.07] bg-white/[.025] p-3"><span className="block h-2 w-12 rounded bg-white/15" /><span className="mt-4 block h-12 rounded-full border-4 border-white/[.07] border-t-white/50" /></div></div></div></div>;
+}
+
+export function ProjectImage({ project, index }: { project: FeaturedProject; index: number }) {
+  const reverse = index % 2 !== 0;
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.55, delay: 0.08 }}
+      whileHover={{ rotateY: 0, rotateX: 0, rotateZ: 0, scale: 1.025 }}
+      className={`project-preview ${reverse ? "project-preview-right" : ""}`}
+    >
+      <div className="flex h-7 items-center gap-1.5 border-b border-white/[.07] bg-white/[.03] px-3">
+        <i /><i /><i />
+        <span className="ml-2 h-2 w-24 rounded-full bg-white/[.08]" />
+      </div>
+      <div className="h-[calc(100%-1.75rem)]">
+        {project.image ? <ProjectScreenshot project={project} /> : <ProjectMockup project={project} />}
+      </div>
+    </motion.div>
+  );
+}
